@@ -30,11 +30,11 @@ app = Flask(__name__)
 def home():
     # Return a message with a list of available API routes
     return (
-        f"Welcome to the Hawaii Climate API!@cd<br/>"
-        f"Available routes:<br/>"
-        f"/api/v1.0/precipitation<br/>"
-        f"/api/v1.0/stations<br/>"
-        f"/api/v1.0/tobs<br/>"
+        f"<h1> Welcome to the Hawaii Climate API!</h1>"
+        f"<h2><bold>Available routes:</bold></h2>"
+        f"<b>Precipitation</b>:        /api/v1.0/precipitation<br/>"
+        f"<b>List of Stations</b>:     /api/v1.0/stations<br/>"
+        f"<b>Temp at the Most Active Station for 1 Year </b>:    /api/v1.0/tobs<br/><br/>"
         f"/api/v1.0/start<br/>"
         f"/api/v1.0/start/end"
     )
@@ -42,11 +42,12 @@ def home():
 # Define the precipitation route
 @app.route("/api/v1.0/precipitation")
 def precipitation():
+    session = Session(engine)
     # Query the date column of the Measurement table for the most recent date
     recent_date = session.query(measurement.date).order_by(measurement.date.desc()).first()
     
     # Convert the most recent date string to a date object
-    recent_date = dt.datetime.strptime(recent_date[0], '%Y-%m-%d').date()
+    recent_date = dt.date(2017,8,23) - dt.timedelta(days=365)
     
     # Calculate the date one year prior to the most recent date
     year_ago = recent_date - dt.timedelta(days=365)
