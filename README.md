@@ -1,4 +1,4 @@
-# sql-challenge
+# sqlalchemy-challenge
 # BootCamp - Module 10 Challenge
 Student Name - Anush De Costa Module 10 Challenge Name - SurfsUp SQLAlchemy-Challenge
 
