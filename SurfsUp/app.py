@@ -7,7 +7,7 @@ from flask import Flask, jsonify
 from datetime import date, timedelta
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, func, inspect
+from sqlalchemy import create_engine, func
 
 # Create an engine for the SQLite database
 engine = create_engine("sqlite:///Resources/hawaii.sqlite")
@@ -43,7 +43,7 @@ def home():
 # Define the precipitation route
 @app.route("/api/v1.0/precipitation")
 def precipitation():
-    """Retrieve the last 12 months of precipitation data and return the results."""
+    """Retrieve the last 12 months of precipitation data."""
     # Create a session from Python to the Database
     session = Session(engine)
     # Query the date column of the Measurement table for the most recent date
