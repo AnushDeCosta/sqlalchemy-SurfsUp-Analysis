@@ -28,7 +28,7 @@ app = Flask(__name__)
 # Define the home route
 @app.route("/")
 def home():
-    # Return a message with a list of available API routes
+    """Return a message with a list of available API routes"""
     return (
         f"<h1> Welcome to the Hawaii Climate API!</h1>"
         f"<h2><bold>Available routes:</bold></h2>"
@@ -43,6 +43,8 @@ def home():
 # Define the precipitation route
 @app.route("/api/v1.0/precipitation")
 def precipitation():
+    """Retrieve the last 12 months of precipitation data and return the results."""
+    # Create a session from Python to the Database
     session = Session(engine)
     # Query the date column of the Measurement table for the most recent date
     recent_date = session.query(measurement.date).order_by(measurement.date.desc()).first()
@@ -67,6 +69,8 @@ def precipitation():
 # Define the station route
 @app.route("/api/v1.0/stations")
 def stations():
+    """Return a JSON list of stations from the dataset."""
+    # Create a session from Python to the Database
     session = Session(engine)
     # Query the station table to retrieve the name and station columns
     result = session.query(station.name, station.station).all()
@@ -80,6 +84,8 @@ def stations():
 # Define the tobs route
 @app.route("/api/v1.0/tobs")
 def tobs():
+    """Dates and temperature observations from a year from the last data point for the most active station."""
+    # Create a session from Python to the Database
     session = Session(engine)
     # Query the most active station from the measurement table
     most_active_station = session.query(measurement.station, func.count(measurement.station)).\
@@ -108,6 +114,8 @@ def tobs():
 # Define Start date temperature route
 @app.route("/api/v1.0/<start>")
 def start_date(start):
+    """Return a JSON list of the MIN, AVG and MAX temperatures from a given date range."""
+    # Create a session from Python to the Database
     session = Session(engine)
     # Query for TMIN, TAVG, and TMAX for the given start date
     result = session.query(func.min(measurement.tobs), func.avg(measurement.tobs), func.max(measurement.tobs)).filter(measurement.date >= start).all()
@@ -118,6 +126,8 @@ def start_date(start):
 # Define Start and end date temperature route
 @app.route("/api/v1.0/<start>/<end>")
 def start_end_date(start, end):
+    """Return a JSON list of the MIN, AVG and MAX temperatures for a given date range."""
+    # Create a session from Python to the Database
     session = Session(engine)
     # Query for TMIN, TAVG, and TMAX between start and end dates
     result = session.query(func.min(measurement.tobs), func.avg(measurement.tobs), func.max(measurement.tobs)).filter(measurement.date >= start).filter(measurement.date <= end).all()
