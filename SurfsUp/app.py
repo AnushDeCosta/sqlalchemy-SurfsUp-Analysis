@@ -34,9 +34,10 @@ def home():
         f"<h2><bold>Available routes:</bold></h2>"
         f"<b>Precipitation</b>:        /api/v1.0/precipitation<br/>"
         f"<b>List of Stations</b>:     /api/v1.0/stations<br/>"
-        f"<b>Temp at the Most Active Station for 1 Year </b>:    /api/v1.0/tobs<br/><br/>"
-        f"/api/v1.0/start<br/>"
-        f"/api/v1.0/start/end"
+        f"<b>Temp. Stats. at the Most Active Station for 1 Year </b>:    /api/v1.0/tobs"
+        f"<h4>For the following links please enter <em>start</em> and <em>end</em> dates as YYYY-MM-DD  -  <em>(Choose only dates between 2010-01-01 and 2017-08-23)</em></h4>"
+        f"<b>Min, Avg and Max Temp. observed for all dates from chosen date </b>:/api/v1.0/start<br/>"
+        f"<b>Min, Avg and Max Temp. observed for all dates between chosen dates</b>: /api/v1.0/start/end"
     )
 
 # Define the precipitation route
